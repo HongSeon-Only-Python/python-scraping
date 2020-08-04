@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as bs4
+import pandas as pd
+# import csv
 
 url = "https://movie.naver.com/movie/running/current.nhn"
 res = requests.get(url)
@@ -17,3 +19,11 @@ for a_tag in get_a:
     movie.append(movie_data)
 
 print(movie)
+
+df = pd.DataFrame(movie, columns=['title', 'code'])
+df.to_csv(r'movie.csv', header=True, index=False)
+
+# with open('./movie.csv', 'a') as csvfile:
+#         fieldnames = ['name', 'code']
+#         csvwriter = csv.DictWriter(csvfile, fieldnames = fieldnames)
+#         csvwriter.writerow(movie)
